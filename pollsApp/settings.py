@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pollsApp2',
+    'pollsApp2.apps.Pollsapp2Config',
 ]
 
 MIDDLEWARE = [

@@ -6,12 +6,13 @@ def home (request):
 
 
     try:
-        question = Question.objects.get()[:]
+        question = Question.objects.all()
     except Question.DoesNotExist:
-        question = None
+        question = [{
+            question:"no questions yet"
+        }]
 
     context = {"question_list" : question}
-    print(question)
 
     return render(request, 'index.html',context)
 
