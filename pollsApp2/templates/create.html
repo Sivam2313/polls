@@ -1,0 +1,9 @@
+<form action="{%url 'pollsApp2:create' %" method="post">
+    {%csrf_token%}
+    <input name="question_name" value="question_name" placeholder="Question">
+    {% with choice_num = 1 %}
+    {% for choice in choice_num %}
+    <input name="choice_name" value="choice{{forloop.counter}}" placeholder="Choice">
+    {%endfor%}
+    <button 
+</form>

@@ -2,5 +2,7 @@
 <ul>
 {% for question in question_list %}
     <li> {{question.question}}</li>
+    {%empty%}
+    <h3>No Tasks</h3>
 {% endfor %}
 </ul>
