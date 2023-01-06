@@ -14,14 +14,14 @@
                     <a class="nav-link active p-2 m-2" aria-current="page" href="../home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active p-2 m-2" aria-current="page" href="#">View Polls</a>
+                    <a class="nav-link active p-2 m-2" aria-current="page" href="../profile">View Polls</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active p-2 m-2" aria-current="page" href="../create">Create</a>
                 </li>
             </ul>
-            <a href="/polls/login" class="login-link">
-                <button class="btn btn-outline-light px-4 m-2">Login</button>
+            <a href="/polls/logout" class="login-link">
+                <button class="btn btn-outline-light px-4 m-2">Logout</button>
             </a>
         </div>
     </div>
@@ -29,7 +29,7 @@
 
 <div class="container-fluid d-flex justify-content-center align-items-center">
     <div class="container-fluid mt-5 shadow content-main" style="width:50vw;border-radius: 15px;">
-        <form action="{%url 'pollsApp2:create' %" method="post">
+        <form action="/polls/vote/{{question.id}}" method="post">
             {%csrf_token%}
             <div class="conrainer-fluid heading-main">
                 <h2>Vote</h2>
@@ -40,7 +40,7 @@
                 </div> 
                 {%for choice in question.choices_set.all%}
                     <div class="choices">
-                        <input type="radio" class="input-choices" id="choice1" name="choice{{choice.id}}" placeholder="Choice">
+                        <input type="radio" class="input-choices" id="choice1" name="choice" value="{{choice.id}}" placeholder="Choice">
                         <label for="choice1" class="form-label choice-label">{{choice.choice_text}}</label>
                     </div>
                 {%endfor%}     

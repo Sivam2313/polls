@@ -70,7 +70,7 @@ def login_user(request):
                 return render(request,"login.html",context)
         return render(request,'login.html',context)
     else:
-        return redirect('/index')
+        return redirect('/polls/home')
 
 
 def logout_user(request):
@@ -79,18 +79,46 @@ def logout_user(request):
 
 def view_profile(request):
     if request.user.is_anonymous:
-        return redirect('/login')
+        return redirect('/polls/login')
     question = Question.objects.all().filter(created_by=request.user)
     context = {
         "question_list" : question
     }
     return render(request,'profile.html',context)
 
-class Vote  (DetailView):
-    model = Question
-    template_name = "vote.html"
-    context_object_name = "question"
+def vote(request,pk):
+    if request.user.is_anonymous:
+        return redirect('/polls/login')
+    question = Question.objects.get(id=pk)
+    context = {
+        "question":question,
+    }
+    if request.method == "POST":
+        choice_idx = request.POST["choice"]
+        choice = Choices.objects.get(id=choice_idx)
+        choice.count += 1
+        choice.save()
+        return redirect('/polls/result/'+str(pk)    )
+    return render(request,'vote.html',context)
 
 def result(request, pk):
-    context = {}
+    question = Question.objects.get(id=pk)
+    choices = Choices.objects.all().filter(question=question)
+    choice_list = []
+    total = 0
+    for choice in choices:
+        total = total + choice.count;
+    if total==0:
+        total = 1
+    for choice in choices:
+        choice_list.append(
+        {
+            "choice":choice,    
+            "percen":choice.count/total * 100,
+        })
+    context = {
+        "question":question,
+        "choice_list":choice_list,
+    }
+
     return render(request,'result.html',context)

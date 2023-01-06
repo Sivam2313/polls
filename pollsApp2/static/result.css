@@ -81,3 +81,28 @@ form{
     padding-bottom: 3vh;
     padding-right: 3vh;
 }
+.choices{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.prog{
+    background-color: rgb(243, 201, 16);
+    color:black
+}
+.wrapper{
+    border-radius: 15px;
+    padding-left: 0px;
+    margin-right: 4vw;
+    display: flex;
+}
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:1vh;
+    margin-left: 5px;
+}
+.text{
+    margin-bottom: 0.5vh;
+}
