@@ -4,11 +4,11 @@ body{
 }
 .content{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-direction: column;
     align-items: flex-start;
     width:100vw;
     height:fit-content;
-    min-height: 100vh;
     padding-top: 5vh;
 }
 .ques{
@@ -18,12 +18,15 @@ body{
     justify-content: space-evenly;
     flex-direction: column;
     width:40vw;
-    height:20vh;
+    height:15vh;
+    margin-bottom: 2vh;
 }
 .question-heading{
     font-family: 'Roboto Slab';
     font-size: 2vmin;
+    padding-left: 2vw;
 }
-.vote-btn{
-    align-self: baseline;
+.button{
+    display: flex;
+    align-self: flex-end;
 }
