@@ -20,12 +20,14 @@
                     <a class="nav-link active p-2 m-2" aria-current="page" href="../create">Create</a>
                 </li>
             </ul>
-            <button class="btn btn-outline-light px-4 m-2">Login</button>
+            <a href="{{link}}" class="login-link">
+                <button class="btn btn-outline-light px-4 m-2">{{text}}</button>
+            </a>
         </div>
     </div>
 </div>
 <div class="container-fluid content">
-{% for question in question_list%}
+    {% for question in question_list%}
     <div class="container-fluid ques shadow">
         <div class="container-fluid question-heading">
             {{question.question}}
