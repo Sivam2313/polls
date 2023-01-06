@@ -1,0 +1,29 @@
+body{
+    box-sizing: border-box;
+    background-color: #ede6e4;
+}
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width:100vw;
+    height:fit-content;
+    min-height: 100vh;
+    padding-top: 5vh;
+}
+.ques{
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width:40vw;
+    height:20vh;
+}
+.question-heading{
+    font-family: 'Roboto Slab';
+    font-size: 2vmin;
+}
+.vote-btn{
+    align-self: baseline;
+}
