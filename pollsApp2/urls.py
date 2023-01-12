@@ -10,4 +10,7 @@ urlpatterns = [
     path('register/',views.register_user,name='register'),
     path('logout/',views.logout_user,name='logout'),
     path('profile/',views.view_profile,name='profile'),
+    path('delete/<int:pk>',views.deletePoll,name='delete'),
+    path('share/<int:pk>',views.shareQuestion,name="share"),
+    path("shared/",views.shared,name="showShared")
 ]

@@ -1,7 +1,8 @@
 {% load static %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Playfair+Display+SC:wght@700&family=Quicksand&family=Roboto+Condensed:wght@300&family=Roboto+Mono&family=Roboto+Slab:wght@600&family=Xanh+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'home.css' %}">
+<link rel="stylesheet" href="{% static 'h.css' %}">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <div class="navbar navbar-expand-lg  navbar-dark bg-dark">
     <div class="container-fluid">
         <a href="" class="navbar-brand">Polls App</a>
@@ -19,6 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link active p-2 m-2" aria-current="page" href="../create">Create</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active p-2 m-2" aria-current="page" href="../shared">Shared</a>
+                </li>
             </ul>
             <a href="{{link}}" class="login-link">
                 <button class="btn btn-outline-light px-4 m-2">{{text}}</button>
@@ -26,24 +30,74 @@
         </div>
     </div>
 </div>
+<!-- <div class="overlap container-fluid">
+    <div class="container rounded shadow">
+        <div class="txt">
+            Select User
+        </div>
+        <!-- <select type="submit" class="form-select" name="share" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            {% for user in users %}
+                <option value="{{user.id}}">{{user.username}}</option>
+            {%endfor%}
+        </select> -->
+
+    </div>
+</div>
+{%csrf_token%}
 <div class="container-fluid content">
     {% for question in question_list%}
     <div class="container-fluid ques shadow">
         <div class="container-fluid question-heading">
             {{question.question}}
+            <div class="status">
+            </div>
         </div>
         <div class="button">
-            <a href="../vote/{{question.id}}" class="link">
-                <button class="vote-btn btn btn-outline-success">
-                    Vote
-                </button>
-            </a>
+            <div class="votes">
+                {{question.votes}} Votes
+            </div>
+            <div class="buttons container">
+                <a href="../vote/{{question.id}}" class="link">
+                    <button class="vote-btn btn btn-outline-success">
+                        Vote
+                    </button>
+                </a>
+                <select type="submit" class="userSelect" class="form-select" id="share{{question.id}}" onchange="shareHandler('{{question.id}}')" name="share" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    {% for user in users %}
+                        <option value="{{user.id}}">{{user.username}}</option>
+                    {%endfor%}
+                </select>
+                    
+            </div>
         </div>
     </div>
     {% empty %}
     <p class="empty"> No Questions Now </p>
 {% endfor %}
 </div>
+<script type="text/javascript"> 
+    axios.defaults.xsrfCookieName = 'csrftoken';
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+    async function shareHandler(id){
+        try{
+            const {data} = await axios.post(
+                '../share/'+id,
+                {
+                    share : document.getElementById("share"+id).value,
+                }
+            )
+            window.location.replace("http://localhost:8000/polls/"+data+"/");
+        }
+        catch(error){
+            console.log("error");
+        }
+   }
+
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <!-- <h2>hello</h2>
 <ul>

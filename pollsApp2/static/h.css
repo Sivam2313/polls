@@ -53,6 +53,9 @@ body{
     display: flex;
     justify-content: flex-end;
 }
-.share-btn{
+.userSelect{
     margin-left: 1vw;
+    width:40%;
+    font-family: 'san-sherif';
+    padding-left: 2vw;
 }
